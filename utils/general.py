@@ -947,7 +947,8 @@ def increment_dir(dir, comment=''):
     dir = str(Path(dir))  # os-agnostic
     d = sorted(glob.glob(dir + '*'))  # directories
     if len(d):
-        n = max([int(x[len(dir):x.rfind('_') if '_' in Path(x).name else None]) for x in d]) + 1  # increment
+        # use x.find to find the first '_'
+        n = max([int(x[len(dir):x.find('_') if '_' in Path(x).name else None]) for x in d]) + 1  # increment
     return dir + str(n) + ('_' + comment if comment else '')
 
 
